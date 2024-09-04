@@ -17,6 +17,10 @@ export const Ticket = ({ticket}) => {
             <div>{ticket.description}</div>
             <footer>
                 <div>
+                    <div className="ticket-info">assignee</div>
+                    <div>{assignedEmployee? assignedEmployee.user?.fullName : "none"}</div>
+                </div>
+                <div>
                     <div className="ticket-info">emergency</div>
                     <div>{ticket.emergency? "yes" : "no"}</div>
                 </div>
