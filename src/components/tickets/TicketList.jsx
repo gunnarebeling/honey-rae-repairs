@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import { getAllTickets } from "../../services/ticketServices"
 import "./Tickets.css"
 import { Ticket } from "./Ticket"
+import { FilterBar } from "./FilterBar"
+
 
 export const TicketList = () => {
     const [allTickets, setAllTickets] = useState([])
     const [showEmergencyOnly, setShowEmergency] = useState(false)
     const [filterdTickets, setFilteredTickets] = useState([])
-
+    const [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
     getAllTickets().then((ticketArray) => {
@@ -29,13 +31,15 @@ export const TicketList = () => {
 
     }, [showEmergencyOnly, allTickets])
 
+    useEffect(()=>{
+        const searchedTickets = allTickets.filter(ticket => ticket.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        setFilteredTickets(searchedTickets)
+    }, [searchTerm, allTickets])
+
     return (
     <div className="tickets-container">
     <h2>tickets</h2>
-    <div>
-        <button className="filter-btn btn-primary" onClick={()=>setShowEmergency(true)}>Emergency</button>
-        <button className="filter-btn btn-info" onClick={() => setShowEmergency(false)}>Show All</button>
-    </div>
+    <FilterBar setShowEmergency={setShowEmergency} setSearchTerm={setSearchTerm}/>
 
     <article className="tickets">
         {filterdTickets.map(ticketItem =>{
