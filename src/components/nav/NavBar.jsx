@@ -2,7 +2,7 @@ import "./NavBar.css"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
-export const NavBar = () => {
+export const NavBar = ({currentUser}) => {
     const navigate = useNavigate()
     return (
         <ul className="navbar">
@@ -14,6 +14,9 @@ export const NavBar = () => {
             </li>
             <li className="navbar-item">
                 <Link className="navbar-link" to="/customers">Customers</Link>
+            </li>
+            <li className="navbar-item">
+                <Link className="Navbar-link" to={`/profile`}>Profile</Link>
             </li>
             {localStorage.getItem("honey_user") ? (
             <li className="navbar-item navbar-logout">
