@@ -2,7 +2,7 @@ import "./NavBar.css"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
-export const NavBar = ({currentUser}) => {
+export const EmployeeNavBar = () => {
     const navigate = useNavigate()
     return (
         <ul className="navbar">
